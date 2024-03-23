@@ -4,7 +4,7 @@ collection: teaching
 type: "Undergraduate course"
 permalink: 
 venue: "Georgia Tech, Aerospace Engineering"
-date: 2024-spring
+date: 2024-01-08
 location:
 ---
 
