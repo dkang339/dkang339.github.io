@@ -8,4 +8,4 @@ date: 2024-01-08
 location:
 ---
 
-AE 4803/8803 Numerical Analysis and Algorithms
+AE 4803/8803 Numerical Analysis and Algorithms (2024 Spring)
