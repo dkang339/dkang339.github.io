@@ -2,7 +2,6 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import Note from "@/components/note/Note.astro";
-import SocialList from "@/components/SocialList.astro";
 import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
@@ -26,15 +25,69 @@ const latestNotes = allNotes
 ---
 
 <PageLayout meta={{ title: "Home" }}>
-	<section>
-		<h1 class="title mb-12">Hello World!</h1>
-		<p class="mb-4">
-			Hi, I’m a theme for Astro, a simple starter that you can use to create your website or blog.
-			If you want to know more about how you can customise me, add more posts, and make it your own,
-			click on the GitHub icon link below and it will take you to my repo.
-		</p>
-		<SocialList />
-	</section>
+<section class="hero-wrapper">
+
+  <h1 class="title hello-title">Hello,</h1>
+
+  <div class="hero-container">
+    <img src="/profile.jpeg" alt="Profile Photo" class="hero-photo" />
+
+    <div class="hero-text">
+      <p>
+        I am a PhD student in Computational Science and Engineering (home unit in Aerospace 
+        Engineering) at Georgia Tech. I joined 
+        <a href="https://www.elizabethqian.com/research/ace-group" target="_blank">ACE group</a>
+        in Fall 2023 and have been working with 
+        <a href="https://www.elizabethqian.com/" target="_blank">Dr. Elizabeth Qian</a>.
+        Before joining the group, I received my master's in Aerospace Engineering, primarily working 
+        on surrogate modeling for engineering applications. My current research focuses on 
+        methodological development in multifidelity machine learning, leveraging both expensive 
+        high- and cheap low-fidelity data.
+      </p>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  .hello-title {
+    margin-bottom: 1rem !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: block;
+  }
+
+  .hero-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .hero-photo {
+    width: 260px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .hero-text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-text p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 링크를 강제로 파란색으로 */
+  .hero-text a {
+    color: #0066cc !important;
+    text-decoration: underline;
+  }
+</style>
 	{
 		pinnedPosts.length > 0 && (
 			<section class="mt-16">
