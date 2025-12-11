@@ -1,0 +1,88 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const publications = [
+  {
+    title: "Condition-based fatigue life monitoring of a high-pressure hydrogen storage vessel using a reduced basis digital twin",
+    authors: "D. Kang, S. Kang, B. Kim, K. Lee",
+    venue: "Engineering Structures",
+    link: "https://www.sciencedirect.com/science/article/pii/S0141029625005875",
+    year: 2025,
+  },
+  {
+    title: "Multifidelity linear regression for scientific machine learning from scarce data",
+    authors: "E. Qian, D. Kang, V. Sella, and A. Chaudhuri",
+    venue: "Foundations of Data Science",
+    link: "https://www.aimsciences.org/article/doi/10.3934/fods.2024049",
+    year: 2025,
+  },
+  {
+    title: "Inverse Identification of a Constitutive Model for High-Speed Forming Simulation: An Application to Electromagnetic Metal Forming",
+    authors: "D. Kang, H. G. Noh, J. Kim, and K. Lee",
+    venue: "Materials",
+    link: "https://doi.org/10.3390/ma15207179",
+    year: 2022,
+  },
+  {
+    title: "Reliability-based Design Optimization of a High-Pressure Hydrogen Storage Vessel Using a Static Condensation Reduced Basis Element Method",
+    authors: "D. Kang, T. M. Pham, and K. Lee",
+    venue: "Transactions of the Korean Society of Mechanical Engineers, A",
+    link: "https://doi.org/10.3795/KSME-A.2022.46.2.127",
+    year: 2022,
+  },
+  {
+    title: "On the Effect of Air-Simulated Side-Jets on the Aerodynamic Characteristics of a Missile by Multi-Fidelity Modeling",
+    authors: "S. Kang, D. Kang, and K. Lee",
+    venue: "Journal of the Korean Society for Aeronautical & Space Sciences",
+    link: "https://doi.org/10.5139/JKSAS.2021.49.2.95",
+    year: 2021,
+  }
+].sort((a,b) => b.year - a.year);
+---
+
+<PageLayout meta={{ title: "Publications" }}>
+  <section class="pubs">
+    <h1 class="title mb-10">Publications</h1>
+
+    <ul class="space-y-6">
+      {publications.map((p) => (
+        <li>
+          <a href={p.link} target="_blank" rel="noopener noreferrer" class="pub-title">
+            {p.title}
+          </a>
+          <div class="pub-authors">
+            {p.authors.split("D. Kang").map((chunk, idx) => (
+              <>
+                {idx > 0 && <span class="me">D. Kang</span>}
+                {chunk}
+              </>
+            ))}
+          </div>
+          <div class="pub-venue">{p.venue} ({p.year})</div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <style>
+    .pubs a.pub-title {
+      color: #0066cc;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .pub-authors {
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 2px;
+    }
+    .pub-venue {
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 1px;
+    }
+    .pub-authors .me {
+      color: #d44848 !important;
+      font-weight: 700 !important;
+    }
+  </style>
+</PageLayout>
