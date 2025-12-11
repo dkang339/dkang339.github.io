@@ -1,0 +1,77 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+  title: "Teaching & Mentoring",
+  description: "Teaching assistantships and research mentoring experience."
+};
+---
+
+<PageLayout meta={meta}>
+  <section class="prose max-w-none">
+    <h1 class="title">Teaching</h1>
+
+    <h2 class="text-xl font-semibold mt-6">
+      Teaching Assistant — Numerical Analysis and Algorithms
+    </h2>
+    <p class="text-sm text-accent-2">
+      Georgia Institute of Technology • Spring 2024, Spring 2025
+    </p>
+    <ul class="list-disc ml-5 mt-2">
+      <li>Led exam review sessions</li>
+      <li>Developed homework problems and solutions</li>
+      <li>Guided students through weekly in-class problem-solving activities</li>
+    </ul>
+
+    <h2 class="text-xl font-semibold mt-6">
+      Teaching Assistant — Introduction to IoT-based Digital Twin
+    </h2>
+    <p class="text-sm text-accent-2">
+      Pusan National University • Fall 2022
+    </p>
+    <ul class="list-disc ml-5 mt-2">
+      <li>Led lectures on mesh generation with Cubit, structural simulation with Akselos, and introduction to fatigue
+analysis</li>
+      <li>Developed homework problems and solutions</li>
+    </ul>
+
+    <h1 class="title mt-12">Mentoring</h1>
+
+    <h2 class="text-xl font-semibold mt-6">
+      Research Mentor — Multifidelity Neural Network Project
+    </h2>
+    <p class="text-sm text-accent-2">
+      Fall 2024 – Fall 2025
+    </p>
+    <ul class="list-disc ml-5 mt-2">
+      <li>Mentor for Georgia Tech <a href="https://undergradresearch.gatech.edu/content/presidents-undergraduate-research-awards" 
+          target="_blank" 
+          class="text-link underline">
+          President’s Undergraduate Research Award (PURA)
+        </a>
+        </li>
+      <li>Mentored an undergraduate student in developing neural network models with multifidelity data</li>
+      <li>Guided theoretical development and development of multifidelity neural networks</li>
+    </ul>
+
+    <h2 class="text-xl font-semibold mt-6">
+      Research Mentor — Multifidelity Linear Regression Project
+    </h2>
+    <p class="text-sm text-accent-2">
+      Summer 2025
+    </p>
+    <ul class="list-disc ml-5 mt-2">
+      <li>Mentor for Georgia Tech’s <a 
+          href="https://sure.gatech.edu/about-sure"
+          target="_blank" 
+          class="text-link underline"
+          >
+          Summer Undergraduate Research in Engineering (SURE)</a>
+      program
+      </li>
+      <li>Mentored an undergraduate student in implementing multifidelity models for uncertainty quantification</li>
+      <li>Guided theory and implementation of multifidelity Monte Carlo and multifidelity linear regression methods</li>
+    </ul>
+
+  </section>
+</PageLayout>
