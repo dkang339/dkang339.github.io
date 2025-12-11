@@ -26,6 +26,7 @@ export const siteConfig: SiteConfig = {
 	*/
 	title: "Dayoung Kang",
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
+	author: "Dayoung Kang",
 	url: "https://dkang339.github.io/",
 };
 
