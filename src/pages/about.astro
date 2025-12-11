@@ -8,29 +8,70 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-	<h1 class="title mb-12">About</h1>
-	<div class="prose prose-sm prose-cactus max-w-none">
+	<section class="hero-wrapper">
+
+	<h1 class="title hello-title">Hello,</h1>
+	<div class="hero-container">
+		<img src="/profile.jpeg" alt="Profile Photo" class="hero-photo" />
+
+		<div class="hero-text">
 		<p>
-			Hi, I’m a starter Astro. I’m particularly great for getting you started with your own blogging
-			website.
+			I am a PhD student in Computational Science and Engineering (home unit in Aerospace 
+			Engineering) at Georgia Tech. I joined 
+			<a href="https://www.elizabethqian.com/research/ace-group" target="_blank">ACE group</a>
+			in Fall 2023 and have been working with 
+			<a href="https://www.elizabethqian.com/" target="_blank">Dr. Elizabeth Qian</a>.
+			Before joining the group, I received my master's in Aerospace Engineering, primarily working 
+			on surrogate modeling for engineering applications. My current research focuses on 
+			methodological development in multifidelity machine learning, leveraging both expensive 
+			high- and cheap low-fidelity data.
 		</p>
-		<p>Here are my some of my awesome built in features:</p>
-		<ul class="list-inside list-disc" role="list">
-			<li>I'm ultra fast as I'm a static site</li>
-			<li>I'm fully responsive</li>
-			<li>I come with a light and dark mode</li>
-			<li>I'm easy to customise and add additional content</li>
-			<li>I have Tailwind CSS styling</li>
-			<li>Shiki code syntax highlighting</li>
-			<li>Satori for auto generating OG images for blog posts</li>
-		</ul>
-		<p>
-			Clone or fork my <a
-				class="cactus-link inline-block"
-				href="https://github.com/chrismwilliams/astro-cactus"
-				rel="noreferrer"
-				target="_blank">repo</a
-			> if you like me!
-		</p>
+		</div>
 	</div>
+	</section>
+
+	<!-- CV Section -->
+    <section class="cv-section mt-16">
+    <h2 class="title text-xl mb-4">CV</h2>
+    <a href="/CV_DKang.pdf" target="_blank" class="cv-btn">📄 Download my CV</a>
+    </section>
+
+  <style>
+    .hero-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-photo {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-text a {
+      color: #0066cc;
+      text-decoration: underline;
+    }
+
+    .cv-btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: #0066cc;
+      color: white;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .cv-btn:hover {
+      background: #004c99;
+    }
+  </style>
+
 </PageLayout>
