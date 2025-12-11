@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import PageLayout from "@/layouts/Base.astro";
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { project } = Astro.props;
+const { title, summary, thumbnail, pdf } = project.data;
+---
+
+<PageLayout meta={{ title }}>
+  <section class="prose max-w-none">
+    <h1 class="title">{title}</h1>
+
+    {summary && <p class="text-accent-2">{summary}</p>}
+
+    {thumbnail && (
+      <img
+        src={thumbnail}
+        alt={title}
+        class="w-full max-w-2xl my-6 rounded"
+      />
+    )}
+
+    {pdf && (
+      <a
+        href={pdf}
+        target="_blank"
+        class="underline text-link text-lg"
+      >
+        📄 View PDF
+      </a>
+    )}
+  </section>
+</PageLayout>

@@ -1,0 +1,51 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+---
+
+<PageLayout meta={{ title: "Projects" }}>
+  <section class="prose max-w-none">
+    <h1 class="title">Projects</h1>
+
+    <ul class="space-y-10 mt-10">
+      {projects.map((p) => (
+        <li class="flex gap-6 items-stretch">
+
+          {p.data.thumbnail && (
+            <img
+              src={p.data.thumbnail}
+              alt={p.data.title}
+              class="w-60 h-auto object-cover rounded"
+            />
+          )}
+
+          <div>
+            <h2 class="text-xl font-semibold">
+              <a href={`/projects/${p.id}/`} class="underline text-link">
+                {p.data.title}
+              </a>
+            </h2>
+
+            {p.data.summary && (
+              <p class="text-accent-2 text-sm mt-1">{p.data.summary}</p>
+            )}
+
+            {p.data.pdf && (
+              <a 
+                href={p.data.pdf}
+                target="_blank"
+                class="text-link underline block mt-2"
+              >
+                📄 View PDF
+              </a>
+            )}
+          </div>
+
+        </li>
+      ))}
+    </ul>
+
+  </section>
+</PageLayout>
