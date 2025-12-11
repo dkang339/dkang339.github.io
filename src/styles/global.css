@@ -69,6 +69,11 @@
 	.title {
 		@apply text-accent-2 text-2xl font-semibold;
 	}
+
+  .hello-title {
+    margin-bottom: 2rem;
+  }
+
 }
 
 @utility prose {
