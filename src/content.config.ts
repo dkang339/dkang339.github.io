@@ -63,6 +63,7 @@ const projects = defineCollection({
 		summary: z.string().optional(),
 		thumbnail: z.string().optional(),
 		pdf: z.string().optional(),
+		github: z.string().optional(),
 	}),
 });
 

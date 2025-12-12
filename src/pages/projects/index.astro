@@ -32,15 +32,26 @@ const projects = await getCollection("projects");
               <p class="text-accent-2 text-sm mt-1">{p.data.summary}</p>
             )}
 
-            {p.data.pdf && (
-              <a 
-                href={p.data.pdf}
-                target="_blank"
-                class="text-link underline block mt-2"
-              >
-                📄 View PDF
-              </a>
-            )}
+            <div class="flex gap-4 mt-2">
+              {p.data.pdf && (
+                <a
+                  href={p.data.pdf}
+                  target="_blank"
+                  class="text-link underline"
+                >
+                  📄 View PDF
+                </a>
+              )}
+              {p.data.github && (
+                <a
+                  href={p.data.github}
+                  target="_blank"
+                  class="text-link underline"
+                >
+                  💻 GitHub
+                </a>
+              )}
+            </div>
           </div>
 
         </li>

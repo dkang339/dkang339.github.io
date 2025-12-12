@@ -4,5 +4,3 @@ summary: "Digital twin-driven fatigue life prediction of a defected hydrogen pre
 thumbnail: "/thumbnails/rbdtwin.png"
 pdf: "/pdfs/rbdtwin.pdf"
 ---
-
-//overview
