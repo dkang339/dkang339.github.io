@@ -1,7 +1,7 @@
 ---
 title: "Error-aware digital twin of a thermal fin in heat sink systems"
 summary: "An error-aware digital twin that accounts for surrogate model errors during the identification process"
-thumbnail: "/thumbnails/modsim_project.png"
+thumbnail: "/thumbnails/simulation.gif"
 pdf: "/pdfs/modsim_project.pdf"
 github: "https://github.com/dkang339/dtwinfin"
 ---
