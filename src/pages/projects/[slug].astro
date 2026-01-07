@@ -14,7 +14,7 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { project } = Astro.props;
-const { title, summary, thumbnail, pdf, github } = project.data;
+const { title, summary, thumbnail, images, pdf, github } = project.data;
 const { Content } = await render(project);
 ---
 
@@ -30,6 +30,18 @@ const { Content } = await render(project);
         alt={title}
         class="w-full max-w-2xl my-6 rounded"
       />
+    )}
+
+    {images && images.length > 0 && (
+      <div class="my-6 space-y-4">
+        {images.map((img, i) => (
+          <img
+            src={img}
+            alt={`${title} figure ${i + 1}`}
+            class="w-full max-w-2xl rounded"
+          />
+        ))}
+      </div>
     )}
 
     <div class="flex gap-4">
