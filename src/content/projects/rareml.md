@@ -1,0 +1,11 @@
+---
+title: "Multifidelity Rare Event Simulation"
+summary: "Develop multifidelity estimators to predict the probability of failure in rare event simulation under limited computational budgets"
+thumbnail: "/thumbnails/rareml.png"
+pdf: "/pdfs/mfrare.pdf"
+github: "https://github.com/dkang339/rareml.git"
+---
+
+Many engineering systems are designed to satisfy strict safety constraints, which leads to rare failure events with probabilities often on the order of 10⁻³ to 10⁻⁴ or less. Although these failures are rare, their consequences can be catastrophic, and accurate probability of failure estimation is therefore critical for system reliability. To estimate the probability of failure, standard single fidelity Monte Carlo methods often rely solely on expensive high-fidelity simulations (such as finite element method or computational fluid dynamics). This approach is computationally impractical for the rare event simulation because failures occur infrequently, requiring significant amount of samples to obtain accurate estimates. Under limited budgets, only a few failures may be observed among thousands or even millions of samples, which leads to high variance estimates and, in the worst case, zero observed failures.
+
+This work develops multifidelity estimators that reduce estimation variance using a control variate method. The multifidelity estimators define control variate using cheaper low fidelity outputs and preserve asymptotic unbiasedness with respect to the true (or high fidelity) probability of failure. In addition to the standard multifidelity Monte Carlo (MFMC) estimator, this work formulates Bayesian posterior-mean variants that return non-zero estimates even when no failed samples are observed, unlike frequentist estimators return zero in that case. Across linear and quadratic limit-state function examples with target failure probabilities of 3 × 10⁻⁴, MFMC estimator consistently outperform its single-fidelity counterpart across the investiged budgets. The Bayesian multifidelity estimators do not uniformly outperform single-fidelity Monte Carlo at all budgets, but their MSE improves relative to the single-fidelity estimator as the computational budget increases. Overall, these results show that multifidelity estimation can achieve lower mean squared error in rare event simulation for the same computational budget.
