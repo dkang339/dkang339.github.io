@@ -1,14 +1,15 @@
 ---
-import { getCollection, render } from "astro:content";
-import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
-import PageLayout from "@/layouts/Base.astro";
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { Container } from '@components/odyssey-theme';
+import Layout from '../../layouts/Page.astro';
 
 export const getStaticPaths = (async () => {
-  const projects = await getCollection("projects");
-  return projects.map((project) => ({
-    params: { slug: project.id },
-    props: { project },
-  }));
+	const projects = await getCollection('projects');
+	return projects.map((project) => ({
+		params: { slug: project.id },
+		props: { project },
+	}));
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
@@ -16,57 +17,94 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { project } = Astro.props;
 const { title, summary, thumbnail, images, pdf, github } = project.data;
 const { Content } = await render(project);
+
+const seo = { title: `${title} | Dayoung Kang`, description: summary };
 ---
 
-<PageLayout meta={{ title }}>
-  <section class="prose max-w-none">
-    <h1 class="title">{title}</h1>
+<Layout {seo}>
+	<Container narrow>
+		<article class="project">
+			<a class="project__back" href="/projects/">← All projects</a>
+			<h1 class="project__title">{title}</h1>
+			{summary && <p class="project__summary">{summary}</p>}
 
-    {summary && <p class="text-accent-2">{summary}</p>}
+			<div class="project__links">
+				{pdf && (
+					<a href={pdf} target="_blank" rel="noopener" class="project__link">📄 PDF</a>
+				)}
+				{github && (
+					<a href={github} target="_blank" rel="noopener" class="project__link">💻 GitHub</a>
+				)}
+			</div>
 
-    {thumbnail && (
-      <img
-        src={thumbnail}
-        alt={title}
-        class="w-full max-w-2xl my-6 rounded"
-      />
-    )}
+			{thumbnail && (
+				<img src={thumbnail} alt={title} class="project__hero" />
+			)}
 
-    {images && images.length > 0 && (
-      <div class="my-6 space-y-4">
-        {images.map((img, i) => (
-          <img
-            src={img}
-            alt={`${title} figure ${i + 1}`}
-            class="w-full max-w-2xl rounded"
-          />
-        ))}
-      </div>
-    )}
+			{images && images.length > 0 && (
+				<div class="project__figures">
+					{images.map((img, i) => (
+						<img src={img} alt={`${title} figure ${i + 1}`} class="project__figure" />
+					))}
+				</div>
+			)}
 
-    <div class="flex gap-4">
-      {pdf && (
-        <a
-          href={pdf}
-          target="_blank"
-          class="underline text-link text-lg"
-        >
-          📄 View PDF
-        </a>
-      )}
-      {github && (
-        <a
-          href={github}
-          target="_blank"
-          class="underline text-link text-lg"
-        >
-          💻 GitHub
-        </a>
-      )}
-    </div>
+			<div class="project__body">
+				<Content />
+			</div>
+		</article>
+	</Container>
+</Layout>
 
-    <div class="mt-8">
-      <Content />
-    </div>
-  </section>
-</PageLayout>
+<style>
+	.project {
+		margin: var(--section-margin) auto;
+	}
+	.project__back {
+		display: inline-block;
+		margin-bottom: 1.5rem;
+		font-size: var(--font-size-sm);
+		opacity: 0.75;
+	}
+	.project__title {
+		margin: 0 0 0.5rem;
+	}
+	.project__summary {
+		font-size: 1.1rem;
+		opacity: 0.8;
+		margin: 0 0 1.5rem;
+	}
+	.project__links {
+		display: flex;
+		gap: 1rem;
+		margin-bottom: 2rem;
+		flex-wrap: wrap;
+	}
+	.project__link {
+		font-size: var(--font-size-sm);
+	}
+	.project__hero {
+		width: 100%;
+		height: auto;
+		border-radius: var(--theme-shape-radius);
+		margin-bottom: 1.5rem;
+	}
+	.project__figures {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+	}
+	.project__figure {
+		width: 100%;
+		height: auto;
+		border-radius: var(--theme-shape-radius);
+	}
+	.project__body {
+		font-size: 1.05rem;
+		line-height: 1.7;
+	}
+	.project__body :global(p) {
+		margin: 0 0 1rem;
+	}
+</style>

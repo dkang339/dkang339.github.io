@@ -1,62 +1,54 @@
 ---
-import PageLayout from "@/layouts/Base.astro";
-import { getCollection } from "astro:content";
+import { getCollection } from 'astro:content';
+import { Container } from '@components/odyssey-theme';
+import Layout from '../../layouts/Page.astro';
+import ProjectCard from '../../components/cards/ProjectCard.astro';
 
-const projects = await getCollection("projects");
+const seo = {
+	title: 'Projects | Dayoung Kang',
+	description: 'Research projects by Dayoung Kang.',
+};
+
+const projects = await getCollection('projects');
 ---
 
-<PageLayout meta={{ title: "Projects" }}>
-  <section class="prose max-w-none">
-    <h1 class="title">Projects</h1>
+<Layout {seo}>
+	<Container>
+		<section class="page-header">
+			<h1>Projects</h1>
+			<p>Click a project to see details, figures, and links.</p>
+		</section>
+		<section class="projects-grid">
+			{projects.map((p) => (
+				<ProjectCard
+					href={`/projects/${p.id}/`}
+					imgSrc={p.data.thumbnail}
+					title={p.data.title}
+					summary={p.data.summary}
+				/>
+			))}
+		</section>
+	</Container>
+</Layout>
 
-    <ul class="space-y-10 mt-10">
-      {projects.map((p) => (
-        <li class="flex gap-6 items-stretch">
-
-          {p.data.thumbnail && (
-            <img
-              src={p.data.thumbnail}
-              alt={p.data.title}
-              class="w-60 h-auto object-cover rounded"
-            />
-          )}
-
-          <div>
-            <h2 class="text-xl font-semibold">
-              <a href={`/projects/${p.id}/`} class="underline text-link">
-                {p.data.title}
-              </a>
-            </h2>
-
-            {p.data.summary && (
-              <p class="text-accent-2 text-sm mt-1">{p.data.summary}</p>
-            )}
-
-            <div class="flex gap-4 mt-2">
-              {p.data.pdf && (
-                <a
-                  href={p.data.pdf}
-                  target="_blank"
-                  class="text-link underline"
-                >
-                  📄 View PDF
-                </a>
-              )}
-              {p.data.github && (
-                <a
-                  href={p.data.github}
-                  target="_blank"
-                  class="text-link underline"
-                >
-                  💻 GitHub
-                </a>
-              )}
-            </div>
-          </div>
-
-        </li>
-      ))}
-    </ul>
-
-  </section>
-</PageLayout>
+<style>
+	.page-header {
+		margin: var(--section-margin) auto 2rem;
+	}
+	.projects-grid {
+		margin: 0 auto var(--section-margin);
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--theme-grid-gap);
+	}
+	@media (max-width: 1024px) {
+		.projects-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (max-width: 600px) {
+		.projects-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

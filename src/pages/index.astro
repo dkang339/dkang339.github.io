@@ -1,140 +1,256 @@
 ---
-// import { type CollectionEntry, getCollection } from "astro:content";
-// import PostPreview from "@/components/blog/PostPreview.astro";
-// import Note from "@/components/note/Note.astro";
-// import { getAllPosts } from "@/data/post";
-import PageLayout from "@/layouts/Base.astro";
-// import { collectionDateSort } from "@/utils/date";
+import { getCollection } from 'astro:content';
+import { Container } from '@components/odyssey-theme';
+import Layout from '../layouts/Page.astro';
+import ProjectCard from '../components/cards/ProjectCard.astro';
 
-const meta = {
-  title: "Home",
-  description: "Personal website -- Dayoung Kang."
+const seo = {
+	title: 'Dayoung Kang',
+	description: 'Personal website of Dayoung Kang, PhD student in Computational Science and Engineering at Georgia Tech.',
 };
 
-// Posts
-// const MAX_POSTS = 10;
-// const allPosts = await getAllPosts();
-// const allPostsByDate = allPosts.sort(collectionDateSort) as CollectionEntry<"post">[];
-// const latestPosts = allPostsByDate.slice(0, MAX_POSTS);
+const projects = await getCollection('projects');
 
-// Pinned Posts, set to a max of 3;
-// const MAX_PINNED_POSTS = 3;
-// const pinnedPosts = allPostsByDate.filter((p) => p.data.pinned).slice(0, MAX_PINNED_POSTS);
-
-// Notes
-// const MAX_NOTES = 5;
-// const allNotes = await getCollection("note");
-// const latestNotes = allNotes
-//	.sort(collectionDateSort)
-//	.slice(0, MAX_NOTES) as CollectionEntry<"note">[];
+const publications = [
+	{
+		title: 'Condition-based fatigue life monitoring of a high-pressure hydrogen storage vessel using a reduced basis digital twin',
+		authors: 'D. Kang, S. Kang, B. Kim, K. Lee',
+		venue: 'Engineering Structures',
+		link: 'https://www.sciencedirect.com/science/article/pii/S0141029625005875',
+		year: 2025,
+	},
+	{
+		title: 'Multifidelity linear regression for scientific machine learning from scarce data',
+		authors: 'E. Qian, D. Kang, V. Sella, and A. Chaudhuri',
+		venue: 'Foundations of Data Science',
+		link: 'https://www.aimsciences.org/article/doi/10.3934/fods.2024049',
+		year: 2025,
+	},
+	{
+		title: 'Inverse Identification of a Constitutive Model for High-Speed Forming Simulation: An Application to Electromagnetic Metal Forming',
+		authors: 'D. Kang, H. G. Noh, J. Kim, and K. Lee',
+		venue: 'Materials',
+		link: 'https://doi.org/10.3390/ma15207179',
+		year: 2022,
+	},
+	{
+		title: 'Reliability-based Design Optimization of a High-Pressure Hydrogen Storage Vessel Using a Static Condensation Reduced Basis Element Method',
+		authors: 'D. Kang, T. M. Pham, and K. Lee',
+		venue: 'Transactions of the Korean Society of Mechanical Engineers, A',
+		link: 'https://doi.org/10.3795/KSME-A.2022.46.2.127',
+		year: 2022,
+	},
+	{
+		title: 'On the Effect of Air-Simulated Side-Jets on the Aerodynamic Characteristics of a Missile by Multi-Fidelity Modeling',
+		authors: 'S. Kang, D. Kang, and K. Lee',
+		venue: 'Journal of the Korean Society for Aeronautical & Space Sciences',
+		link: 'https://doi.org/10.5139/JKSAS.2021.49.2.95',
+		year: 2021,
+	},
+].sort((a, b) => b.year - a.year);
 ---
 
-<PageLayout meta={meta}>
-<section class="hero-wrapper">
+<Layout {seo}>
+	<Container>
+		<section class="hero">
+			<div class="hero__photo-wrap">
+				<img src="/profile.jpeg" alt="Dayoung Kang" class="hero__photo" />
+			</div>
+			<div class="hero__text">
+				<h1 class="hero__title">Hello,</h1>
+				<p>
+					I am a PhD student in Computational Science and Engineering (home unit in Aerospace
+					Engineering) at Georgia Tech. I joined
+					<a href="https://www.elizabethqian.com/research/ace-group" target="_blank" rel="noopener">ACE group</a>
+					in Fall 2023 and have been working with
+					<a href="https://www.elizabethqian.com/" target="_blank" rel="noopener">Dr. Elizabeth Qian</a>.
+					Before joining the group, I received my master's in Aerospace Engineering, primarily
+					working on surrogate modeling for engineering applications. My current research focuses
+					on methodological development in multifidelity machine learning, leveraging both
+					expensive high- and cheap low-fidelity data.
+				</p>
+				<div class="hero__links">
+					<a href="/CV_DKang.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+					<a href="mailto:dkang339@gatech.edu">Email</a>
+					<a href="https://github.com/dkang339" target="_blank" rel="noopener">GitHub</a>
+					<a href="https://www.linkedin.com/in/dayoung-kang-7323a828b" target="_blank" rel="noopener">LinkedIn</a>
+				</div>
+			</div>
+		</section>
+	</Container>
 
-  <h1 class="title hello-title">Hello,</h1>
+	<Container>
+		<section class="home-section">
+			<header class="home-section__header">
+				<h2>Projects</h2>
+				<a class="home-section__more" href="/projects">All projects →</a>
+			</header>
+			<div class="projects-grid">
+				{projects.map((p) => (
+					<ProjectCard
+						href={`/projects/${p.id}/`}
+						imgSrc={p.data.thumbnail}
+						title={p.data.title}
+						summary={p.data.summary}
+					/>
+				))}
+			</div>
+		</section>
+	</Container>
 
-  <div class="hero-container">
-    <img src="/profile.jpeg" alt="Profile Photo" class="hero-photo" />
+	<Container>
+		<section class="home-section">
+			<header class="home-section__header">
+				<h2>Publications</h2>
+				<a class="home-section__more" href="/pubs">All publications →</a>
+			</header>
+			<ul class="pubs-list">
+				{publications.map((p) => (
+					<li class="pubs-list__item">
+						<a href={p.link} target="_blank" rel="noopener noreferrer" class="pubs-list__title">
+							{p.title}
+						</a>
+						<div class="pubs-list__authors" set:html={p.authors.split('D. Kang').map((c, i) => i > 0 ? `<span class="me">D. Kang</span>${c}` : c).join('')}></div>
+						<div class="pubs-list__venue">{p.venue} ({p.year})</div>
+					</li>
+				))}
+			</ul>
+		</section>
+	</Container>
 
-    <div class="hero-text">
-      <p>
-        I am a PhD student in Computational Science and Engineering (home unit in Aerospace 
-        Engineering) at Georgia Tech. I joined 
-        <a href="https://www.elizabethqian.com/research/ace-group" target="_blank">ACE group</a>
-        in Fall 2023 and have been working with 
-        <a href="https://www.elizabethqian.com/" target="_blank">Dr. Elizabeth Qian</a>.
-        Before joining the group, I received my master's in Aerospace Engineering, primarily working 
-        on surrogate modeling for engineering applications. My current research focuses on 
-        methodological development in multifidelity machine learning, leveraging both expensive 
-        high- and cheap low-fidelity data.
-      </p>
-    </div>
-  </div>
-
-</section>
+	<Container>
+		<section class="home-section">
+			<header class="home-section__header">
+				<h2>Teaching & Mentoring</h2>
+				<a class="home-section__more" href="/teaching">Details →</a>
+			</header>
+			<ul class="teaching-list">
+				<li><strong>Teaching Assistant</strong> — Numerical Analysis and Algorithms · Georgia Tech · Spring 2024, Spring 2025</li>
+				<li><strong>Teaching Assistant</strong> — Introduction to IoT-based Digital Twin · Pusan National University · Fall 2022</li>
+				<li><strong>Research Mentor</strong> — Multifidelity Neural Network Project (PURA) · Fall 2024 – Fall 2025</li>
+				<li><strong>Research Mentor</strong> — Multifidelity Linear Regression Project (SURE) · Summer 2025</li>
+			</ul>
+		</section>
+	</Container>
+</Layout>
 
 <style>
-  .hello-title {
-    margin-bottom: 1rem !important;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-    display: block;
-  }
+	.hero {
+		margin: var(--section-margin) auto;
+		display: grid;
+		grid-template-columns: minmax(220px, 320px) 1fr;
+		gap: 2.5rem;
+		align-items: center;
+	}
+	.hero__photo {
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		border-radius: var(--theme-shape-radius);
+		display: block;
+	}
+	.hero__title {
+		margin-top: 0;
+	}
+	.hero__text p {
+		margin: 0 0 1.5rem;
+		line-height: 1.7;
+	}
+	.hero__text a {
+		color: inherit;
+	}
+	.hero__links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.25rem;
+		font-size: var(--font-size-sm);
+	}
+	@media (max-width: 768px) {
+		.hero {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+			text-align: left;
+		}
+		.hero__photo {
+			max-width: 240px;
+		}
+	}
 
-  .hero-container {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-  }
+	.home-section {
+		margin: var(--section-margin) auto;
+	}
+	.home-section__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: 1.5rem;
+		gap: 1rem;
+	}
+	.home-section__header h2 {
+		margin: 0;
+	}
+	.home-section__more {
+		font-size: var(--font-size-sm);
+		opacity: 0.75;
+	}
 
-  .hero-photo {
-    width: 260px;
-    height: 260px;
-    object-fit: cover;
-    border-radius: 8px;
-    flex-shrink: 0;
-  }
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--theme-grid-gap);
+	}
+	@media (max-width: 1024px) {
+		.projects-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (max-width: 600px) {
+		.projects-grid {
+			grid-template-columns: 1fr;
+		}
+	}
 
-  .hero-text {
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
+	.pubs-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.pubs-list__item {
+		padding: 1rem 0;
+		border-bottom: 1px solid var(--theme-surface-1);
+	}
+	.pubs-list__item:last-child {
+		border-bottom: none;
+	}
+	.pubs-list__title {
+		font-weight: 600;
+		font-size: 1.05rem;
+	}
+	.pubs-list__authors {
+		font-size: 0.95rem;
+		opacity: 0.8;
+		margin-top: 0.25rem;
+	}
+	.pubs-list__authors :global(.me) {
+		font-weight: 700;
+		color: var(--theme-primary);
+	}
+	.pubs-list__venue {
+		font-size: 0.9rem;
+		opacity: 0.65;
+		margin-top: 0.25rem;
+	}
 
-  .hero-text p {
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  /* hyperlink blue */
-  .hero-text a {
-    color: #0066cc !important;
-    text-decoration: underline;
-  }
+	.teaching-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.teaching-list li {
+		padding: 0.75rem 0;
+		border-bottom: 1px solid var(--theme-surface-1);
+	}
+	.teaching-list li:last-child {
+		border-bottom: none;
+	}
 </style>
-<!--
-	{
-		pinnedPosts.length > 0 && (
-			<section class="mt-16">
-				<h2 class="title mb-6 text-xl">Pinned Posts</h2>
-				<ul class="space-y-4" role="list">
-					{pinnedPosts.map((p) => (
-						<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
-							<PostPreview post={p} />
-						</li>
-					))}
-				</ul>
-			</section>
-		)
-	}
-	<section class="mt-16">
-		<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
-		<ul class="space-y-4" role="list">
-			{
-				latestPosts.map((p) => (
-					<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
-						<PostPreview post={p} />
-					</li>
-				))
-			}
-		</ul>
-	</section>
-	{
-		latestNotes.length > 0 && (
-			<section class="mt-16">
-				<h2 class="title text-accent mb-6 text-xl">
-					<a href="/notes/">Notes</a>
-				</h2>
-				<ul class="space-y-6" role="list">
-					{latestNotes.map((note) => (
-						<li>
-							<Note note={note} as="h3" isPreview />
-						</li>
-					))}
-				</ul>
-			</section>
-		)
-	}
--->
-</PageLayout>
