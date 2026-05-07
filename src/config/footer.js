@@ -20,10 +20,11 @@ export const footerLists = [
 	{
 		title: 'Site',
 		items: [
-			{ title: 'Home', slug: '/' },
+			{ title: 'About', slug: '/' },
 			{ title: 'Publications', slug: '/pubs' },
 			{ title: 'Projects', slug: '/projects' },
 			{ title: 'Teaching', slug: '/teaching' },
+			{ title: 'Contact', slug: '/contact' },
 		],
 	},
 	{

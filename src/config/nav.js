@@ -1,6 +1,6 @@
 export const nav = [
 	{
-		title: 'Home',
+		title: 'About',
 		slug: '/',
 	},
 	{
@@ -14,5 +14,9 @@ export const nav = [
 	{
 		title: 'Teaching',
 		slug: '/teaching',
+	},
+	{
+		title: 'Contact',
+		slug: '/contact',
 	},
 ];

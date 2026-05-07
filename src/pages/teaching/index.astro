@@ -70,6 +70,15 @@ const seo = {
 	.page-header {
 		margin: var(--section-margin) auto 1rem;
 	}
+	.page-header h1::after {
+		content: '';
+		display: block;
+		width: 6rem;
+		height: 3px;
+		background-color: var(--theme-primary);
+		margin-top: 0.5rem;
+		border-radius: 2px;
+	}
 	.entry {
 		margin: 0 auto 2rem;
 	}
