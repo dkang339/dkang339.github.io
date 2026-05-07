@@ -5,6 +5,12 @@ import Plug from './Plug.astro';
 
 const { footerSocials, footerLists, copyrightName, background, color, showPlug: showPlug = true } =
   Astro.props;
+
+const lastUpdated = new Date().toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
 
 <footer
@@ -52,6 +58,7 @@ const { footerSocials, footerLists, copyrightName, background, color, showPlug: 
     <div class="footer-copyright__container">
       {showPlug && <Plug/>}
       <p>Copyright &copy; {new Date().getFullYear()} {copyrightName}</p>
+      <p class="footer-last-updated">Last updated: {lastUpdated}</p>
     </div>
 
   </Container>
@@ -102,6 +109,11 @@ const { footerSocials, footerLists, copyrightName, background, color, showPlug: 
   }
   .footer-copyright__container p {
     font-size: var(--font-size-sm);
+    margin: 0;
+  }
+  .footer-last-updated {
+    margin-top: 0.25rem !important;
+    opacity: 0.7;
   }
   @media (max-width: 768px) {
     .footer-grid__container :first-child {
