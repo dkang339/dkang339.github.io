@@ -10,7 +10,9 @@ const seo = {
 	description: 'Personal website of Dayoung Kang, PhD student in Computational Science and Engineering at Georgia Tech.',
 };
 
-const projects = await getCollection('projects');
+const projects = (await getCollection('projects')).sort(
+	(a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0)
+);
 
 const publications = [
 	{

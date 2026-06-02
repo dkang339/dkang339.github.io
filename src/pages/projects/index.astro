@@ -9,7 +9,9 @@ const seo = {
 	description: 'Research projects by Dayoung Kang.',
 };
 
-const projects = await getCollection('projects');
+const projects = (await getCollection('projects')).sort(
+	(a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0)
+);
 ---
 
 <Layout {seo}>

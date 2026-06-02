@@ -2,6 +2,7 @@
 title: "Multifidelity Kernel Regression"
 summary: "Multifidelity estimator for kernel regression problem that is more robust than the single fidelity kernel regression model under the same computational budget"
 thumbnail: "/thumbnails/mfkernel.png"
+date: 2026-06-01
 pdf: "/pdfs/mfkernel.pdf"
 github: "https://github.com/dkang339/mfkerreg"
 ---
