@@ -16,7 +16,7 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { project } = Astro.props;
-const { title, summary, thumbnail, images, pdf, github } = project.data;
+const { title, summary, subtitle, thumbnail, images, videos, pdf, github } = project.data;
 const { Content } = await render(project);
 
 const seo = { title: `${title} | Dayoung Kang`, description: summary };
@@ -27,6 +27,7 @@ const seo = { title: `${title} | Dayoung Kang`, description: summary };
 		<article class="project">
 			<a class="project__back" href="/projects/">← All projects</a>
 			<h1 class="project__title">{title}</h1>
+			{subtitle && <p class="project__subtitle">{subtitle}</p>}
 			{summary && <p class="project__summary">{summary}</p>}
 
 			<div class="project__links">
@@ -42,8 +43,23 @@ const seo = { title: `${title} | Dayoung Kang`, description: summary };
 				)}
 			</div>
 
-			{thumbnail && (
+			{thumbnail && !videos && (
 				<img src={thumbnail} alt={title} class="project__hero" />
+			)}
+
+			{videos && videos.length > 0 && (
+				<div class="project__videos">
+					{videos.map((video) => (
+						<figure class="project__video-figure">
+							<div class="project__video-frame">
+								<video class="project__video" controls muted playsinline preload="metadata">
+									<source src={video.src} type="video/mp4" />
+								</video>
+							</div>
+							{video.caption && <figcaption>{video.caption}</figcaption>}
+						</figure>
+					))}
+				</div>
 			)}
 
 			{images && images.length > 0 && (
@@ -79,6 +95,12 @@ const seo = { title: `${title} | Dayoung Kang`, description: summary };
 		opacity: 0.8;
 		margin: 0 0 1.5rem;
 	}
+	.project__subtitle {
+		margin: 0 0 0.75rem;
+		font-size: var(--font-size-sm);
+		font-weight: 700;
+		color: var(--theme-primary);
+	}
 	.project__links {
 		display: flex;
 		gap: 1rem;
@@ -108,6 +130,32 @@ const seo = { title: `${title} | Dayoung Kang`, description: summary };
 		height: auto;
 		margin-bottom: 1.5rem;
 	}
+	.project__videos {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+	.project__video-figure {
+		margin: 0;
+	}
+	.project__video-frame {
+		overflow: hidden;
+		aspect-ratio: 4 / 3;
+		background-color: var(--theme-surface-2);
+	}
+	.project__video {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.project__video-figure figcaption {
+		margin-top: 0.5rem;
+		font-size: var(--font-size-sm);
+		line-height: 1.5;
+		opacity: 0.8;
+	}
 	.project__figures {
 		display: flex;
 		flex-direction: column;
@@ -124,5 +172,10 @@ const seo = { title: `${title} | Dayoung Kang`, description: summary };
 	}
 	.project__body :global(p) {
 		margin: 0 0 1rem;
+	}
+	@media (max-width: 700px) {
+		.project__videos {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>

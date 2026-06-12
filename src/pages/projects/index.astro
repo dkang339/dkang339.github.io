@@ -27,6 +27,8 @@ const projects = (await getCollection('projects')).sort(
 					imgSrc={p.data.thumbnail}
 					title={p.data.title}
 					summary={p.data.summary}
+					pdf={p.data.pdf}
+					github={p.data.github}
 				/>
 			))}
 		</section>

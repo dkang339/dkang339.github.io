@@ -9,6 +9,15 @@ const projects = defineCollection({
 		thumbnail: z.string().optional(),
 		date: z.coerce.date().optional(),
 		images: z.array(z.string()).optional(),
+		subtitle: z.string().optional(),
+		videos: z
+			.array(
+				z.object({
+					src: z.string(),
+					caption: z.string().optional(),
+				})
+			)
+			.optional(),
 		pdf: z.string().optional(),
 		github: z.string().optional(),
 	}),
