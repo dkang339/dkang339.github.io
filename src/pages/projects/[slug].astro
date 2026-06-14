@@ -117,10 +117,14 @@ const seo = { title: `${title} | Dayoung Kang`, description: summary };
 		padding: 0.4rem 0.8rem;
 		background-color: var(--theme-surface-1);
 		border-radius: var(--theme-button-border-radius);
-		transition: background-color var(--theme-transition);
+		transition:
+			background-color var(--theme-transition),
+			color var(--theme-transition);
 	}
-	.project__link:hover {
-		background-color: var(--theme-surface-2);
+	.project__link:hover,
+	.project__link:focus-visible {
+		background-color: var(--theme-primary);
+		color: var(--theme-on-primary);
 	}
 	.project__link [data-icon] {
 		font-size: 1.1em;

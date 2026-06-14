@@ -101,13 +101,21 @@ const isVideo = typeof imgSrc === 'string' && /\.(mp4|webm|ogg)$/i.test(imgSrc.s
 		display: inline-flex;
 		align-items: center;
 		gap: 0.35rem;
+		padding: 0.25rem 0.45rem;
 		color: inherit;
 		font-size: var(--font-size-sm);
 		text-decoration: none;
+		border-radius: var(--theme-button-border-radius);
 		opacity: 0.78;
-		transition: opacity var(--theme-transition);
+		transition:
+			background-color var(--theme-transition),
+			color var(--theme-transition),
+			opacity var(--theme-transition);
 	}
-	.project-card__action:hover {
+	.project-card__action:hover,
+	.project-card__action:focus-visible {
+		background-color: var(--theme-primary);
+		color: var(--theme-on-primary);
 		opacity: 1;
 	}
 	.project-card__action [data-icon] {
